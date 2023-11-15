@@ -17,11 +17,11 @@ int print_s(va_list lit)
 	int len, i;
 
 	s = va_arg(lit, char *);
-	len = strlen(s);
 
 	if (s == NULL)
 	{
 		s = "(null)";
+		len = strlen(s);
 		for (i = 0; i < len; i++)
 			_putchar(s[i]);
 		return (len);
@@ -29,6 +29,7 @@ int print_s(va_list lit)
 
 	else
 	{
+		len = strlen(s);
 		for (i = 0; i < len; i++)
 			_putchar(s[i]);
 		return (len);

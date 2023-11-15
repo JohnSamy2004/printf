@@ -4,10 +4,11 @@
  * print_per - prints a percent (char 37)
  *
  *
- * Return: sure 1
+ * Return: 1.
  */
 
 int print_per(void)
 {
-	return (write(1, "%%", 1));
+	_putchar('%');
+	return (1);
 }

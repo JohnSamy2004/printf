@@ -9,7 +9,7 @@
  */
 int _printf(const char * const format, ...)
 {
-	int m, n, length = 0, match_found = 0;
+	int m, n, length = 0;
 
 	conv_match match[] = {
 		{"%c", print_c},
@@ -23,8 +23,9 @@ int _printf(const char * const format, ...)
 
 	va_start(arguments, format);
 
-	if (format[0] == '%' && format[1] == '\0' || format == NULL)
+	if ((format[0] == '%' && format[1] == '\0') || format == NULL)
 		return (-1);
+their_is:
 
 	for (m = 0; format[m] != '\0'; m++)
 	{
@@ -33,14 +34,10 @@ int _printf(const char * const format, ...)
 			if (match[n].strptr[0] == format[m] && match[n].strptr[1] == format[m + 1])
 			{
 				length += match[n].fun(arguments);
-				match_found = 1;
-				break;
+				m += 2;
+				goto their_is;
+			
 			}
-		}
-		if (match_found)
-		{
-			m += 2;
-			continue;
 		}
 		_putchar(format[m]);
 		length++;

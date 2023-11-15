@@ -37,14 +37,7 @@ int _printf(const char * const format, ...)
 				break;
 			}
 		}
-		if (n == 5)
-		{
-			length += _putchar('%');
-		}
-		else
-		{
-			length += _putchar(format[m]);
-		}
+		length += _putchar(format[m]);
 	}
 	va_end(arguments);
 	return (length);

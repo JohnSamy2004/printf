@@ -23,7 +23,7 @@ int _printf(const char * const format, ...)
 
 	va_start(arguments, format);
 
-	if ((format[0] == '%' && format[1] == '\0') || format == NULL)
+	if (!format || (format[0] == '%' && format[1] == '\0'))
 		return (-1);
 their_is:
 

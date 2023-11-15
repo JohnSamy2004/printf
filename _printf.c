@@ -25,22 +25,26 @@ int _printf(const char * const format, ...)
 
 	if (!format || (format[0] == '%' && format[1] == '\0'))
 		return (-1);
-their_is:
 
 	for (m = 0; format[m] != '\0'; m++)
 	{
-		for (n = 4; n >= 0; n--)
+		for (n = 0; n < 5; n++)
 		{
-			if (match[n].strptr[0] == format[m] && match[n].strptr[1] == format[m + 1])
+			if (strncmp(match[n].strptr, &format[m], 2) == 0)
 			{
 				length += match[n].fun(arguments);
-				m += 2;
-				goto their_is;
-			
+				m += 1;
+				break;
 			}
 		}
-		_putchar(format[m]);
-		length++;
+		if (n == 5)
+		{
+			length += _putchar('%');
+		}
+		else
+		{
+			length += _putchar(format[m]);
+		}
 	}
 	va_end(arguments);
 	return (length);

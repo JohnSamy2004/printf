@@ -9,7 +9,7 @@
  */
 int _printf(const char * const format, ...)
 {
-	int m, n, length = 0;
+	size_t m, n, length = 0;
 
 	conv_match match[] = {
 		{"%c", print_c},
@@ -33,7 +33,7 @@ int _printf(const char * const format, ...)
 			if (strncmp(match[n].strptr, &format[m], 2) == 0)
 			{
 				length += match[n].fun(arguments);
-				m += 1;
+				m += 2;
 				break;
 			}
 		}

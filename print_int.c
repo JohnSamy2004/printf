@@ -1,55 +1,32 @@
 #include "main.h"
 
 /**
- * print_num - Helper function to print an integer.
- * @n: The number to be printed.
- * Return: Number of characters printed.
- */
-
-int print_num(int n)
-{
-	int i = 1;
-
-	if (n < 0)
-	{
-		_putchar('-');
-		i++;
-		n = -n;
-	}
-
-	if (n / 10 != 0)
-	{
-		i += print_num(n / 10);
-	}
-
-	_putchar((n % 10) + '0');
-	return (i);
-}
-
-/**
  * print_int - prints integer as printf exactly
  *
- * @arg_s: that is an argument or input number
+ * @lit: that is an argument or input number
  *
  * Return: value of integer
  */
-int print_int(va_list arg_s)
+
+int print_int(va_list lit)
 {
-	int n = va_arg(arg_s, int);
+	int num = va_arg(lit, int);
+	int temp = 1;
+	int len = 0;
 
-	return (print_num(n));
-}
+	if (num < 0) {
+	len += _putchar('-');
+	num = -num;
+	}
 
-/**
- * print_dec - prints integer as printf exactly
- *
- * @arg_s: that is an argument or input number
- *
- * Return: value of integer
- */
-int print_dec(va_list arg_s)
-{
-	int n = va_arg(arg_s, int);
+	while (num / temp >= 10) {
+		temp *= 10;
+	}
 
-	return (print_num(n));
+	while (temp) {
+	len += _putchar((num / temp) + '0');
+	num %= temp;
+	temp /= 10;
+	}
+	return (len);
 }

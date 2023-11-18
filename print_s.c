@@ -7,21 +7,33 @@
  * number of arguments using the va_list mechanism.
  *
  * @lit: Argument containing the string to be printed.
- * @len: length
  *
  * Return: The length of the string.
  */
 
-int print_s(va_list lit, int len)
+int print_s(va_list lit)
 {
 	char *s;
+	int len = 0, i;
 
 	s = va_arg(lit, char *);
 
-	for(; *s;)
+	if (s == NULL)
 	{
-		len = _putchar(*s++);
+		s = "(null)";
+		len = 6;
+		for (i = 0; i < 6; i++)
+			_putchar(s[i]);
+		return (len);
 	}
 
-	return (len);
+	else
+	{
+		while (*s)
+		{
+			len += _putchar(*s++);
+		}
+
+		return (len);
+	}
 }

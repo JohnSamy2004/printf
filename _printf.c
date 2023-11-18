@@ -9,15 +9,8 @@
  */
 int _printf(const char * const format, ...)
 {
-	size_t m, n, length = 0;
-
-	conv_match match[] = {
-		{"%c", print_c},
-		{"%s", print_s},
-		{"%%", print_per},
-		{"%d", print_dec},
-		{"%i", print_int}
-	};
+	int length = 0;
+	const char *f = format;
 
 	va_list arguments;
 
@@ -26,18 +19,18 @@ int _printf(const char * const format, ...)
 	if (!format || (format[0] == '%' && format[1] == '\0'))
 		return (-1);
 
-	for (m = 0; format[m] != '\0'; m++)
+	while (*f)
 	{
-		for (n = 0; n < 5; n++)
+		if (*f == '%' && *(f + 1))
 		{
-			if (strncmp(match[n].strptr, &format[m], 2) == 0)
-			{
-				length += match[n].fun(arguments);
-				m += 2;
-				break;
-			}
+			f++;
+			length += all(f, arguments);
 		}
-		length += _putchar(format[m]);
+		else
+		{
+			length += _putchar(*f);
+		}
+		f++;
 	}
 	va_end(arguments);
 	return (length);
